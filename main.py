@@ -11,7 +11,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     """Gets the headers and subsection from a word file"""
-    section_text = word.get_section_text(args)
+    section_text = word.get_text(args)
 
     """Convert dictionary file to Anki file"""
     anki.dict_to_anki(section_text, args.deck_name)
