@@ -1,23 +1,26 @@
 import zipfile    
 import xml.etree.ElementTree as ET
 
-global ns
+ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
 
-def get_text(args):
-    global ns
+def get_text(docx_path):
     """Loading Word document and converting to XML"""
-    file_path = args.docx_path
+    file_path = docx_path
     doc = zipfile.ZipFile(file_path).read('word/document.xml')
     root = ET.fromstring(doc)
+    f= open("document.xml", "w")
+    f.write(str(doc))
 
     """Get text sections from XML file"""
-    ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
     body = root.find('w:body', ns)
     p_sections = body.findall('w:p', ns)
 
     """Get text in each section"""
+    text_elems = []
     for p in p_sections:
-        text_elems = p.findall('.//w:t', ns)
+        text_elems.append(p.findall('.//w:t', ns))
+        print([t.text for t in p])
+        print()
 
     """Differentiating between header and subsection"""
     section_labels = [get_section_text(s,text_elems) if is_heading2_section(s) else '' for s in p_sections]
@@ -25,7 +28,6 @@ def get_text(args):
     return section_text
 
 def is_heading2_section(p):
-    global ns
     """Returns True if the given paragraph section has been styled as a Heading2"""
     return_val = False
     heading_style_elem = p.find(".//w:pStyle[@w:val='Heading2']", ns)
@@ -35,7 +37,6 @@ def is_heading2_section(p):
  
  
 def get_section_text(p, text_elems):
-    global ns
     """Returns the joined text of the text elements under the given paragraph tag"""
     return_val = ''
     text_elems = p.findall('.//w:t', ns)
