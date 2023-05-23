@@ -8,16 +8,13 @@ def get_paragraphes(doc):
     text = []
 
     for paragraph in document.paragraphs:
-        if paragraph.style.name == 'Heading 2':
+        if paragraph.style.name == 'Heading 3':
             text.append({"title":paragraph.text, "text":""})
             continue
         elif paragraph.style.name.startswith("Heading"):
             continue
 
         if(len(text) > 0):
-            text[len(text)-1]["text"] += "\n" + paragraph.text
+            text[len(text)-1]["text"] += '<br>-' + paragraph.text
         
     return text
-
-if __name__ == '__main__':
-    get_paragraphes('word/Test for Anki.docx')
