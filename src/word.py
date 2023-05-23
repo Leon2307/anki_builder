@@ -1,6 +1,8 @@
 from docx.api import Document
 
 def get_paragraphes(doc):
+    """Gets all paragraphes from the doc and returns a dictionary with 
+    {"title": ..., "text": ...}"""
     document = Document(doc)
     
     text = []
