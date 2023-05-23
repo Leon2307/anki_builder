@@ -1,6 +1,6 @@
 import argparse
-import anki
-import word
+import src.anki as anki
+import src.word as word
 
 if __name__ == "__main__":
 
