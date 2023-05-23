@@ -1,7 +1,6 @@
 import argparse
 import anki
 import word
-import test_alternative
 
 if __name__ == "__main__":
 
@@ -12,7 +11,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     """Gets the headers and subsection as a dictionary from a word file"""
-    section_text = test_alternative.get_paragraphes(args.docx_path)
+    section_text = word.get_paragraphes(args.docx_path)
 
     """Convert dictionary to Anki file"""
     anki.dict_to_anki(section_text, args.deck_name)
