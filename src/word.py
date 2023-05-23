@@ -1,5 +1,6 @@
 from docx.api import Document
 import docx2txt as d2t
+import logging
 
 def get_paragraphes(doc, settings):
     """Gets all paragraphes from the doc and returns a dictionary with 
@@ -8,6 +9,7 @@ def get_paragraphes(doc, settings):
     document = Document(doc)
     text = []
     image_count = 1
+    logging.info("Reading Text from document...")
     for paragraph in document.paragraphs:
         if paragraph.style.name == settings['heading_style']:
             text.append({"title":paragraph.text, "text":"", "images":[]})
@@ -42,6 +44,7 @@ def has_image(paragraph):
 
 def extract_images_from_docx(file_path, img_folder, get_text=False):
     """Gets all the images included in the Word document and saves them to the img_folder"""
+    logging.info("Extracting images from document...")
     text = d2t.process(file_path, img_folder)
 
     if(get_text):
