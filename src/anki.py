@@ -17,7 +17,7 @@ my_model = genanki.Model(
   ])
 
 
-def dict_to_anki(section_text,deck_name):
+def dict_to_anki(section_text,deck_name, settings):
     """Generates an anki deck with cards from dictionary and exports it as an apkg"""
     my_deck = genanki.Deck(
         random.randrange(1 << 30, 1 << 31),
@@ -30,5 +30,5 @@ def dict_to_anki(section_text,deck_name):
             fields=[card['title'],card['text']]
         )
         my_deck.add_note(my_note)
-    genanki.Package(my_deck).write_to_file("output_files/{}.apkg".format(deck_name))
+    genanki.Package(my_deck).write_to_file("{}/{}.apkg".format(settings['output_path'], deck_name))
     return 

@@ -1,5 +1,5 @@
 Dieses Programm ermöglicht es Word Dateien in Ankikarten umzuwandeln. 
-Hierbei werden Überschriften vom Typ Header 2 in Fragen und Texte zu Antworten umgewandelt.
+Hierbei werden Überschriften vom Typ Header 3 in Fragen und Texte zu Antworten umgewandelt.
 
 Bei der Programmausführung müssen folgende Argumente übergeben werden:
 
