@@ -15,8 +15,8 @@ if __name__ == "__main__":
     with open("settings.yaml", 'r') as stream:
         settings = yaml.safe_load(stream)
 
-    """Gets the headers and subsection as a dictionary from a word file"""
-    section_text = word.get_paragraphes(args.docx_path, settings)
+    """Gets the headers, images and subsection as a dictionary from a word file"""
+    text_dict = word.get_paragraphes(args.docx_path, settings)
 
     """Convert dictionary to Anki file"""
-    anki.dict_to_anki(section_text, args.deck_name, settings)
+    anki.dict_to_anki(text_dict, args.deck_name, settings)
